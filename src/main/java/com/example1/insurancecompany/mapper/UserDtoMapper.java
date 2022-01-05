@@ -12,7 +12,6 @@ public class UserDtoMapper {
         public static User mapToUser(UserDto userDto) {
 
                 return User.builder()
-                        .id(userDto.getId())
                         .firstName(userDto.getFirstName())
                         .lastName(userDto.getLastName())
                         .username(userDto.getUsername())

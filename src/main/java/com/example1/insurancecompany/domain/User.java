@@ -13,7 +13,7 @@ import java.util.Collection;
 @Getter
 @Setter
 @Builder
-@Table(name = "client")
+@Table(name = "user")
 public class User {
 
         @Id
