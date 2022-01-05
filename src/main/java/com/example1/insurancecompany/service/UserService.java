@@ -75,9 +75,12 @@ public class UserService implements UserDetailsService {
                 userEdited.setFirstName(userDto.getFirstName());
                 userEdited.setLastName(userDto.getLastName());
                 userEdited.setUsername(userDto.getUsername());
-                userEdited.setPassword(passwordEncoder.encode(userDto.getPassword()));
+                userEdited.setDayOfBirth(userDto.getDayOfBirth());
+                userEdited.setMonthOfBirth(userDto.getMonthOfBirth());
+                userEdited.setYearOfBirth(userDto.getYearOfBirth());
                 userEdited.setEmail(userDto.getEmail());
                 userEdited.setPhone(userDto.getPhone());
+                userEdited.setPassword(passwordEncoder.encode(userDto.getPassword()));
                 return userRepository.save(userEdited);
         }
 
