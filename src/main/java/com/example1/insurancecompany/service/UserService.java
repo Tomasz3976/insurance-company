@@ -29,27 +29,13 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class UserService implements UserDetailsService {
+public class UserService {
 
         public static final int PAGE_SIZE = 5;
         private final UserRepository userRepository;
         private final PasswordEncoder passwordEncoder;
         private final RoleRepository roleRepository;
 
-
-        @Override
-        public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-                User user = userRepository.findByUsername(username)
-                        .orElseThrow(() -> new UsernameNotFoundException("User With Given Username Not Found!"));
-
-                log.info("User found in the database: {}", username);
-
-                Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
-                user.getRoles().forEach(role -> {
-                        authorities.add(new SimpleGrantedAuthority(role.getName()));
-                });
-                return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
-        }
 
         public List<User> getAllUsers(Integer page) {
                 log.info("Fetching all users");
