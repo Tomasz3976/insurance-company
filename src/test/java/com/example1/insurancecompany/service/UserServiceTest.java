@@ -134,9 +134,9 @@ public class UserServiceTest {
                 User user = User.builder().id(6L).username("Adamek").roles(new ArrayList<>()).build();
                 Role role = Role.builder().name("ROLE_USER").users(new ArrayList<>()).build();
 
-                when(userRepository.findById(6L)).thenReturn(Optional.of(user));
-                when(roleRepository.findByName("ROLE_USER")).thenReturn(Optional.of(role));
-                when(userRepository.save(user)).thenReturn(user);
+                given(userRepository.findById(6L)).willReturn(Optional.of(user));
+                given(roleRepository.findByName("ROLE_USER")).willReturn(Optional.of(role));
+                given(userRepository.save(user)).willReturn(user);
 
                 userService.addRoleToUser(6L, "ROLE_USER");
 
@@ -150,7 +150,7 @@ public class UserServiceTest {
                 UserDto userDto = UserDto.builder().username("Shark008").build();
                 User user = User.builder().username("Shark008").build();
 
-                when(userRepository.findByUsername("Shark008")).thenReturn(Optional.of(user));
+                given(userRepository.findByUsername("Shark008")).willReturn(Optional.of(user));
 
                 assertThrows(ExistingEntityException.class, () -> userService.saveUser(userDto));
         }
@@ -160,7 +160,7 @@ public class UserServiceTest {
                 Role role = Role.builder().name("ROLE_USER").build();
                 Role role2 = Role.builder().name("ROLE_USER").build();
 
-                when(roleRepository.findByName("ROLE_USER")).thenReturn(Optional.of(role2));
+                given(roleRepository.findByName("ROLE_USER")).willReturn(Optional.of(role2));
 
                 assertThrows(ExistingEntityException.class, () -> userService.saveRole(role));
         }
@@ -170,8 +170,8 @@ public class UserServiceTest {
                 Role role = Role.builder().name("ROLE_USER").build();
                 User user = User.builder().id(7L).roles(Arrays.asList(role)).build();
 
-                when(userRepository.findById(7L)).thenReturn(Optional.of(user));
-                when(roleRepository.findByName("ROLE_USER")).thenReturn(Optional.of(role));
+                given(userRepository.findById(7L)).willReturn(Optional.of(user));
+                given(roleRepository.findByName("ROLE_USER")).willReturn(Optional.of(role));
 
                 assertThrows(AssignedRoleException.class, () -> userService.addRoleToUser(7L, "ROLE_USER"));
         }

@@ -53,4 +53,14 @@ public class GlobalExceptionHandler {
 
         }
 
+        @ExceptionHandler(IllegalArgumentException.class)
+        public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException e, WebRequest request) {
+
+                ErrorDetails errorDetails = new ErrorDetails(e.getMessage(),
+                        request.getDescription(false), ZonedDateTime.now());
+
+                return new ResponseEntity<>(errorDetails, HttpStatus.METHOD_NOT_ALLOWED);
+
+        }
+
 }

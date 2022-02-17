@@ -54,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 http.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
                         .and().httpBasic().authenticationEntryPoint(swaggerAuthenticationEntryPoint());
                 http.authorizeRequests().antMatchers("/login").permitAll()
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                         .and().logout().logoutSuccessUrl("/login");
                 http.addFilter(new JWTAuthenticationFilter(authenticationManagerBean(), expirationTime, secretKey));
                 http.addFilterBefore(new JWTAuthorizationFilter(secretKey), UsernamePasswordAuthenticationFilter.class);
