@@ -4,14 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Collection;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @Builder
 @Table(name = "user")
 public class User {
@@ -48,7 +46,11 @@ public class User {
         @Column(name = "password", nullable = false)
         private String password;
 
-        @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+        @JsonIgnore
+        @OneToMany(mappedBy = "user")
+        private Collection<Insurance> insurances;
+
+        @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
         @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
         private Collection<Role> roles;
 

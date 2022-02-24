@@ -7,10 +7,9 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @Builder
 @Table(name = "role")
 public class Role {

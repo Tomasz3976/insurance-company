@@ -1,8 +1,6 @@
 package com.example1.insurancecompany.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 @Data
 @AllArgsConstructor
