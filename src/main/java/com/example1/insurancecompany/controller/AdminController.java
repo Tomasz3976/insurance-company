@@ -1,6 +1,5 @@
 package com.example1.insurancecompany.controller;
 
-import com.example1.insurancecompany.details.InsurancePrice;
 import com.example1.insurancecompany.domain.Role;
 import com.example1.insurancecompany.domain.User;
 import com.example1.insurancecompany.dto.UserDisplayDto;
@@ -22,7 +21,7 @@ public class AdminController {
 
         @GetMapping("/users/all")
         public List<UserDisplayDto> getUsers(@RequestParam Integer page) {
-                return UserDisplayDtoMapper.mapUserToUserDisplayDto(userService.getAllUsers(page));
+                return UserDisplayDtoMapper.mapToUserDisplayDto(userService.getAllUsers(page));
         }
 
         @PostMapping("/users")

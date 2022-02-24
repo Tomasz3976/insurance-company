@@ -1,12 +1,8 @@
 package com.example1.insurancecompany.details;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
+@Data
 @AllArgsConstructor
 @Builder
 public class CarDetails {
@@ -17,7 +13,7 @@ public class CarDetails {
         private Integer yearOfProduction;
         private Integer mileageInKm;
         private Integer engineCapacityInCm3;
-        private Integer periodOfInsurance;
+        private Integer insuranceTimeInYears;
 
 
 }
