@@ -13,8 +13,8 @@ import java.time.ZonedDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-        @ExceptionHandler(ExistingEntityException.class)
-        public ResponseEntity<Object> handleExistingEntityException(ExistingEntityException e, WebRequest request) {
+        @ExceptionHandler({ExistingEntityException.class, AssignedRoleException.class})
+        public ResponseEntity<Object> handleCustomBadRequestException(Exception e, WebRequest request) {
 
                 ErrorDetails errorDetails = new ErrorDetails(e.getMessage(),
                         request.getDescription(false), ZonedDateTime.now());
@@ -23,28 +23,8 @@ public class GlobalExceptionHandler {
 
         }
 
-        @ExceptionHandler(AssignedRoleException.class)
-        public ResponseEntity<Object> handleAssignedRoleException(AssignedRoleException e, WebRequest request) {
-
-                ErrorDetails errorDetails = new ErrorDetails(e.getMessage(),
-                        request.getDescription(false), ZonedDateTime.now());
-
-                return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
-
-        }
-
-        @ExceptionHandler(UsernameNotFoundException.class)
-        public ResponseEntity<Object> handleUsernameNotFoundException(UsernameNotFoundException e, WebRequest request) {
-
-                ErrorDetails errorDetails = new ErrorDetails(e.getMessage(),
-                        request.getDescription(false), ZonedDateTime.now());
-
-                return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
-
-        }
-
-        @ExceptionHandler(EntityNotFoundException.class)
-        public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException e, WebRequest request) {
+        @ExceptionHandler({UsernameNotFoundException.class, EntityNotFoundException.class})
+        public ResponseEntity<Object> handleNotFoundException(Exception e, WebRequest request) {
 
                 ErrorDetails errorDetails = new ErrorDetails(e.getMessage(),
                         request.getDescription(false), ZonedDateTime.now());
@@ -54,7 +34,7 @@ public class GlobalExceptionHandler {
         }
 
         @ExceptionHandler(IllegalArgumentException.class)
-        public ResponseEntity<Object> handleIllegalArgumentException(IllegalArgumentException e, WebRequest request) {
+        public ResponseEntity<Object> handleMethodNotAllowedException(Exception e, WebRequest request) {
 
                 ErrorDetails errorDetails = new ErrorDetails(e.getMessage(),
                         request.getDescription(false), ZonedDateTime.now());
