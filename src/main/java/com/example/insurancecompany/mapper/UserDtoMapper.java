@@ -4,25 +4,19 @@ import com.example.insurancecompany.domain.User;
 import com.example.insurancecompany.dto.UserDto;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserDtoMapper {
 
-        public static User mapToUser(UserDto userDto) {
+        public static List<UserDto> mapToUserDto(List<User> users) {
 
-                return User.builder()
-                        .firstName(userDto.getFirstName())
-                        .lastName(userDto.getLastName())
-                        .username(userDto.getUsername())
-                        .dayOfBirth(userDto.getDayOfBirth())
-                        .monthOfBirth(userDto.getMonthOfBirth())
-                        .yearOfBirth(userDto.getYearOfBirth())
-                        .email(userDto.getEmail())
-                        .phone(userDto.getPhone())
-                        .password(userDto.getPassword())
-                        .roles(new ArrayList<>())
-                        .build();
+                return users.stream()
+                        .map(user -> new UserDto(user.getId(), user.getFirstName(),
+                                user.getLastName(), user.getUsername(), user.getDayOfBirth(),
+                                user.getMonthOfBirth(), user.getYearOfBirth(), user.getEmail(),
+                                user.getPhone(), user.getPassword())).collect(Collectors.toList());
 
         }
 
