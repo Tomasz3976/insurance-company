@@ -4,10 +4,10 @@ import com.example.insurancecompany.domain.Role;
 import com.example.insurancecompany.repository.RoleRepository;
 import com.example.insurancecompany.repository.UserRepository;
 import com.example.insurancecompany.domain.User;
-import com.example.insurancecompany.dto.UserDto;
+import com.example.insurancecompany.dto.UserInDto;
 import com.example.insurancecompany.exception.AssignedRoleException;
 import com.example.insurancecompany.exception.ExistingEntityException;
-import com.example.insurancecompany.mapper.UserDtoMapper;
+import com.example.insurancecompany.mapper.UserInDtoMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -37,30 +37,30 @@ public class UserService {
                 return userRepository.findUsers(PageRequest.of(pageNumber - 1, DEFAULT_PAGE_SIZE));
         }
 
-        public UserDto saveUser(UserDto userDto) {
-                if(userRepository.findByUsername(userDto.getUsername()).isPresent()) {
+        public UserInDto saveUser(UserInDto userInDto) {
+                if(userRepository.findByUsername(userInDto.getUsername()).isPresent()) {
 
                         throw new ExistingEntityException("User With Given Username Already Exists!");
                 }
-                log.info("Saving new user {} to the database", userDto.getUsername());
-                userDto.setPassword(passwordEncoder.encode(userDto.getPassword()));
-                userRepository.save(UserDtoMapper.mapToUser(userDto));
-                return userDto;
+                log.info("Saving new user {} to the database", userInDto.getUsername());
+                userInDto.setPassword(passwordEncoder.encode(userInDto.getPassword()));
+                userRepository.save(UserInDtoMapper.mapToUser(userInDto));
+                return userInDto;
         }
 
-        public User editUser(Long id, UserDto userDto) {
+        public User editUser(Long id, UserInDto userInDto) {
                 User userEdited = userRepository.findById(id)
                         .orElseThrow(() -> new UsernameNotFoundException("This User Does Not Exists!"));
                 log.info("Edition user with id {}", id);
-                userEdited.setFirstName(userDto.getFirstName());
-                userEdited.setLastName(userDto.getLastName());
-                userEdited.setUsername(userDto.getUsername());
-                userEdited.setDayOfBirth(userDto.getDayOfBirth());
-                userEdited.setMonthOfBirth(userDto.getMonthOfBirth());
-                userEdited.setYearOfBirth(userDto.getYearOfBirth());
-                userEdited.setEmail(userDto.getEmail());
-                userEdited.setPhone(userDto.getPhone());
-                userEdited.setPassword(passwordEncoder.encode(userDto.getPassword()));
+                userEdited.setFirstName(userInDto.getFirstName());
+                userEdited.setLastName(userInDto.getLastName());
+                userEdited.setUsername(userInDto.getUsername());
+                userEdited.setDayOfBirth(userInDto.getDayOfBirth());
+                userEdited.setMonthOfBirth(userInDto.getMonthOfBirth());
+                userEdited.setYearOfBirth(userInDto.getYearOfBirth());
+                userEdited.setEmail(userInDto.getEmail());
+                userEdited.setPhone(userInDto.getPhone());
+                userEdited.setPassword(passwordEncoder.encode(userInDto.getPassword()));
                 return userRepository.save(userEdited);
         }
 

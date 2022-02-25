@@ -4,7 +4,7 @@ import com.example.insurancecompany.repository.RoleRepository;
 import com.example.insurancecompany.repository.UserRepository;
 import com.example.insurancecompany.domain.Role;
 import com.example.insurancecompany.domain.User;
-import com.example.insurancecompany.dto.UserDto;
+import com.example.insurancecompany.dto.UserInDto;
 import com.example.insurancecompany.exception.AssignedRoleException;
 import com.example.insurancecompany.exception.ExistingEntityException;
 import org.junit.jupiter.api.Test;
@@ -74,7 +74,7 @@ public class UserServiceTest {
         @Test
         void itShouldSaveNewUser() {
 
-                UserDto userDto = UserDto.builder()
+                UserInDto userInDto = UserInDto.builder()
                         .username("AppleCake998")
                         .build();
 
@@ -88,7 +88,7 @@ public class UserServiceTest {
                 given(userRepository.save(user)).willReturn(user);
 
 
-                UserDto saved = userService.saveUser(userDto);
+                UserInDto saved = userService.saveUser(userInDto);
 
                 assertThat(saved.getUsername()).isEqualTo(user.getUsername());
 
@@ -97,7 +97,7 @@ public class UserServiceTest {
         @Test
         void itShouldEditUser() {
 
-                UserDto userDto = UserDto.builder()
+                UserInDto userInDto = UserInDto.builder()
                         .username("George98")
                         .build();
 
@@ -110,7 +110,7 @@ public class UserServiceTest {
                 given(userRepository.save(user)).willReturn(user);
 
 
-                assertThat(userService.editUser(2L, userDto).getUsername()).isEqualTo(user.getUsername());
+                assertThat(userService.editUser(2L, userInDto).getUsername()).isEqualTo(user.getUsername());
 
         }
 
@@ -208,7 +208,7 @@ public class UserServiceTest {
         @Test
         void itShouldThrowExistingUserException() {
 
-                UserDto userDto = UserDto.builder()
+                UserInDto userInDto = UserInDto.builder()
                         .username("Shark008")
                         .build();
 
@@ -220,7 +220,7 @@ public class UserServiceTest {
                 given(userRepository.findByUsername("Shark008")).willReturn(Optional.of(user));
 
 
-                assertThrows(ExistingEntityException.class, () -> userService.saveUser(userDto));
+                assertThrows(ExistingEntityException.class, () -> userService.saveUser(userInDto));
 
         }
 
