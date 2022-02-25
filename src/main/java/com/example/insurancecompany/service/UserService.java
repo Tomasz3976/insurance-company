@@ -25,7 +25,7 @@ import java.util.List;
 @Slf4j
 public class UserService {
 
-        public static final int PAGE_SIZE = 5;
+        public static final int DEFAULT_PAGE_SIZE = 5;
         private final UserRepository userRepository;
         private final PasswordEncoder passwordEncoder;
         private final RoleRepository roleRepository;
@@ -34,7 +34,7 @@ public class UserService {
         public List<User> getAllUsers(Integer page) {
                 log.info("Fetching all users");
                 int pageNumber = page == null || page <= 0 ? 1 : page;
-                return userRepository.findUsers(PageRequest.of(pageNumber - 1, PAGE_SIZE));
+                return userRepository.findUsers(PageRequest.of(pageNumber - 1, DEFAULT_PAGE_SIZE));
         }
 
         public UserDto saveUser(UserDto userDto) {
