@@ -2,7 +2,7 @@ package com.example.insurancecompany.service;
 
 import com.example.insurancecompany.details.CarCalculateDetails;
 import com.example.insurancecompany.mapper.PrintableDetailsMapper;
-import com.example.insurancecompany.calculator.Calculator;
+import com.example.insurancecompany.utils.Calculator;
 import com.example.insurancecompany.details.CarDetails;
 import com.example.insurancecompany.details.HouseCalculateDetails;
 import com.example.insurancecompany.details.HouseDetails;

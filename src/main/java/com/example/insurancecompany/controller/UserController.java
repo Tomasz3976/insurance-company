@@ -4,7 +4,6 @@ import com.example.insurancecompany.domain.Role;
 import com.example.insurancecompany.domain.User;
 import com.example.insurancecompany.dto.UserDto;
 import com.example.insurancecompany.dto.UserInDto;
-import com.example.insurancecompany.mapper.UserDtoMapper;
 import com.example.insurancecompany.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -26,8 +25,8 @@ public class UserController {
 
 
         @GetMapping("/users")
-        public List<UserDto> getUsers(@RequestParam Integer page) {
-                return UserDtoMapper.mapToUserDto(userService.getAllUsers(page));
+        public List<UserDto> getAllUsers(@RequestParam(required = false) Integer page) {
+                return userService.getAllUsers(page);
         }
 
         @PostMapping("/users")

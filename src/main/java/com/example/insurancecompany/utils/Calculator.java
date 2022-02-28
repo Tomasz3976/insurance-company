@@ -1,4 +1,4 @@
-package com.example.insurancecompany.calculator;
+package com.example.insurancecompany.utils;
 
 import com.example.insurancecompany.details.CarCalculateDetails;
 import com.example.insurancecompany.details.HouseCalculateDetails;
