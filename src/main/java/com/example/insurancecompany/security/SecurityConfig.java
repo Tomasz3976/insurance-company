@@ -54,6 +54,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 http.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
                         .and().httpBasic().authenticationEntryPoint(swaggerAuthenticationEntryPoint());
                 http.authorizeRequests().antMatchers("/login").permitAll()
+                        .antMatchers("/users/**").hasAnyAuthority("ROLE_ADMIN")
+                        .antMatchers("/calculation/**").hasAnyAuthority("ROLE_USER")
                         .antMatchers("/buying/**").hasAnyAuthority("ROLE_USER")
                         .anyRequest().authenticated()
                         .and().logout().logoutSuccessUrl("/login");

@@ -1,6 +1,8 @@
 package com.example.insurancecompany.service;
 
 import com.example.insurancecompany.domain.Role;
+import com.example.insurancecompany.dto.UserDto;
+import com.example.insurancecompany.mapper.UserDtoMapper;
 import com.example.insurancecompany.repository.RoleRepository;
 import com.example.insurancecompany.repository.UserRepository;
 import com.example.insurancecompany.domain.User;
@@ -8,6 +10,7 @@ import com.example.insurancecompany.dto.UserInDto;
 import com.example.insurancecompany.exception.AssignedRoleException;
 import com.example.insurancecompany.exception.ExistingEntityException;
 import com.example.insurancecompany.mapper.UserInDtoMapper;
+import com.example.insurancecompany.utils.PageValidator;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
@@ -31,10 +34,11 @@ public class UserService {
         private final RoleRepository roleRepository;
 
 
-        public List<User> getAllUsers(Integer page) {
+        public List<UserDto> getAllUsers(Integer page) {
                 log.info("Fetching all users");
-                int pageNumber = page == null || page <= 0 ? 1 : page;
-                return userRepository.findUsers(PageRequest.of(pageNumber - 1, DEFAULT_PAGE_SIZE));
+                int pageNumber = PageValidator.pageNumber(page);
+                List<User> users = userRepository.findUsers(PageRequest.of(pageNumber - 1, DEFAULT_PAGE_SIZE));
+                return UserDtoMapper.mapToUserDto(users);
         }
 
         public UserInDto saveUser(UserInDto userInDto) {
