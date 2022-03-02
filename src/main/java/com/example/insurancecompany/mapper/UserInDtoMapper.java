@@ -22,6 +22,7 @@ public class UserInDtoMapper {
                         .phone(userInDto.getPhone())
                         .password(userInDto.getPassword())
                         .roles(new ArrayList<>())
+                        .insurances(new ArrayList<>())
                         .build();
 
         }

@@ -1,0 +1,37 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/insurancecompanydb
+    username: username
+    password: password
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+        hibernate:
+          dialect: org.hibernate.dialect.MySQL8Dialect
+          format_sql: true
+    show-sql: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: insurance.company285@gmail.com
+    password: Insurance.Company285#
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+jwt:
+  expirationTime: 1800000
+  secretKey: frog-lion-monkey-penguin-tiger87
+
+confirmation:
+  token:
+    time: 15

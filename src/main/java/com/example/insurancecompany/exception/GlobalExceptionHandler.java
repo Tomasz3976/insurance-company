@@ -13,7 +13,7 @@ import java.time.ZonedDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-        @ExceptionHandler({ExistingEntityException.class, AssignedRoleException.class})
+        @ExceptionHandler({ExistingEntityException.class, AssignedRoleException.class, WeakPasswordException.class})
         public ResponseEntity<Object> handleCustomBadRequestException(Exception e, WebRequest request) {
 
                 ErrorDetails errorDetails = new ErrorDetails(e.getMessage(),
@@ -33,7 +33,7 @@ public class GlobalExceptionHandler {
 
         }
 
-        @ExceptionHandler(IllegalArgumentException.class)
+        @ExceptionHandler({IllegalArgumentException.class, IllegalStateException.class})
         public ResponseEntity<Object> handleMethodNotAllowedException(Exception e, WebRequest request) {
 
                 ErrorDetails errorDetails = new ErrorDetails(e.getMessage(),

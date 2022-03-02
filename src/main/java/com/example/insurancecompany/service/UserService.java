@@ -33,7 +33,6 @@ public class UserService {
         private final PasswordEncoder passwordEncoder;
         private final RoleRepository roleRepository;
 
-
         public List<UserDto> getAllUsers(Integer page) {
                 log.info("Fetching all users");
                 int pageNumber = PageValidator.pageNumber(page);

@@ -31,7 +31,6 @@ public class BuyingService {
         private final LoggedInUser loggedInUser;
         private final InsuranceRepository insuranceRepository;
 
-
         public InsuranceDisplayDto buyCarInsurance(CarDetails details) {
 
                 CarCalculateDetails calculateDetails = CalculateDetailsMapper.mapToCarCalculateDetails(details);

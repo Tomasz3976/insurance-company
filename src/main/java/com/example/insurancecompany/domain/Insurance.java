@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -30,6 +32,7 @@ public class Insurance {
         @Column(name = "id", unique = true, nullable = false)
         private Long id;
 
+        @Enumerated(EnumType.STRING)
         @Column(name = "type", nullable = false)
         private InsuranceType type;
 

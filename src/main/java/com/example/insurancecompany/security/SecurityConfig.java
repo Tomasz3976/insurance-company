@@ -57,8 +57,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers("/users/**").hasAnyAuthority("ROLE_ADMIN")
                         .antMatchers("/calculation/**").hasAnyAuthority("ROLE_USER")
                         .antMatchers("/buying/**").hasAnyAuthority("ROLE_USER")
+                        .antMatchers("/registration/**").permitAll()
                         .anyRequest().authenticated()
-                        .and().logout().logoutSuccessUrl("/login");
+                        .and().formLogin();
                 http.addFilter(new JWTAuthenticationFilter(authenticationManagerBean(), expirationTime, secretKey));
                 http.addFilterBefore(new JWTAuthorizationFilter(secretKey), UsernamePasswordAuthenticationFilter.class);
         }
