@@ -2,15 +2,15 @@ package com.example.insurancecompany.utils;
 
 import com.example.insurancecompany.details.CarCalculateDetails;
 import com.example.insurancecompany.details.HouseCalculateDetails;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 
-@Service
 public class Calculator {
 
         private static int currentYear = LocalDate.now().getYear();
 
+        private Calculator(){
+        }
 
         public static Integer carInsuranceCalculator(CarCalculateDetails details) {
 

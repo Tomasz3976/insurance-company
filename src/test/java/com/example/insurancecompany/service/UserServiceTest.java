@@ -80,6 +80,7 @@ public class UserServiceTest {
 
                 User user = User.builder()
                         .username("AppleCake998")
+                        .insurances(new ArrayList<>())
                         .roles(new ArrayList<>())
                         .build();
 
