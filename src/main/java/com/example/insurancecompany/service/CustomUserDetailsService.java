@@ -67,6 +67,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         public String signUpUser(User user) {
+                log.info("Registration of new user {}", user.getUsername());
                 user.setPassword(passwordEncoder.encode(user.getPassword()));
                 userRepository.save(user);
                 String token = UUID.randomUUID().toString();
@@ -86,6 +87,7 @@ public class CustomUserDetailsService implements UserDetailsService {
         }
 
         public void enableUser(String email) {
+                log.info("Activation account of user with email {}", email);
                 User user = userRepository.findByEmail(email)
                         .orElseThrow(() -> new UsernameNotFoundException("Username Not Found!"));
                 Role roleUser = roleRepository.findByName("ROLE_USER")
