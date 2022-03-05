@@ -1,15 +1,15 @@
 package com.example.insurancecompany.mapper;
 
 import com.example.insurancecompany.domain.Insurance;
-import com.example.insurancecompany.dto.InsuranceDisplayDto;
+import com.example.insurancecompany.dto.InsuranceDto;
 import org.springframework.stereotype.Service;
 
 @Service
-public class InsuranceDisplayDtoMapper {
+public class InsuranceDtoMapper {
 
-        public static InsuranceDisplayDto mapToInsuranceDisplayDto(Insurance insurance) {
+        public static InsuranceDto mapToInsuranceDisplayDto(Insurance insurance) {
 
-                return InsuranceDisplayDto.builder()
+                return InsuranceDto.builder()
                         .id(insurance.getId())
                         .type(insurance.getType())
                         .startDate(insurance.getStartDate())

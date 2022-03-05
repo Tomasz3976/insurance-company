@@ -9,7 +9,7 @@ public class PrintableDetailsMapper {
 
         public static String mapToCarPrintableDetails(CarDetails details) {
 
-                return "Brand: " + details.getBrand()
+                return "\nBrand: " + details.getBrand()
                         + "\nModel: " + details.getModel()
                         + "\nRegistration Number: " + details.getRegistrationNumber()
                         + "\nYear Of Production: " + details.getYearOfProduction()
@@ -20,7 +20,7 @@ public class PrintableDetailsMapper {
 
         public static String mapToHousePrintableDetails(HouseDetails details) {
 
-                return "Town: " + details.getTown()
+                return "\nTown: " + details.getTown()
                         + "\nStreet: " + details.getStreet()
                         + "\nHouse Number: " + details.getHouseNumber()
                         + "\nZip Code: " + details.getZipCode()

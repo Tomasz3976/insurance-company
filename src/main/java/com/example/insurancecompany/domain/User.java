@@ -60,7 +60,7 @@ public class User {
         private String password;
 
         @JsonIgnore
-        @OneToMany(mappedBy = "user")
+        @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
         private Collection<Insurance> insurances;
 
         @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})

@@ -4,7 +4,7 @@ import com.example.insurancecompany.constant.InsuranceType;
 import com.example.insurancecompany.details.CarDetails;
 import com.example.insurancecompany.domain.Insurance;
 import com.example.insurancecompany.domain.User;
-import com.example.insurancecompany.dto.InsuranceDisplayDto;
+import com.example.insurancecompany.dto.InsuranceDto;
 import com.example.insurancecompany.repository.InsuranceRepository;
 import com.example.insurancecompany.security.LoggedInUser;
 import com.example.insurancecompany.details.HouseDetails;
@@ -47,24 +47,24 @@ class BuyingServiceTest {
                         .insuranceTimeInYears(1)
                         .build();
 
+                User user = User.builder()
+                        .build();
+
                 Insurance carInsurance = Insurance.builder()
                         .type(InsuranceType.CAR)
                         .startDate(LocalDate.now())
                         .endDate(LocalDate.now().plusYears(1))
                         .price(1015)
-                        .printableDetails("Brand: Peugeot\nModel: 208\nRegistration Number: ERD-76409"
+                        .printableDetails("\nBrand: Peugeot\nModel: 208\nRegistration Number: ERD-76409"
                                 + "\nYear Of Production: 2019\nMileage (km): 8500\nEngine Capacity (cm3): 1800")
+                        .user(user)
                         .build();
 
-                InsuranceDisplayDto insuranceDisplayDto = InsuranceDisplayDto.builder()
+                InsuranceDto insuranceDto = InsuranceDto.builder()
                         .type(InsuranceType.CAR)
                         .startDate(LocalDate.now())
                         .endDate(LocalDate.now().plusYears(1))
                         .price(1015)
-                        .build();
-
-                User user = User.builder()
-                        .insurances(new ArrayList<>())
                         .build();
 
 
@@ -72,8 +72,7 @@ class BuyingServiceTest {
                 given(loggedInUser.getUser()).willReturn(user);
 
 
-                Assertions.assertThat(buyingService.buyCarInsurance(carDetails)).isEqualTo(insuranceDisplayDto);
-                assertThat(user.getInsurances().contains(carInsurance)).isTrue();
+                assertThat(buyingService.buyCarInsurance(carDetails)).isEqualTo(insuranceDto);
 
         }
 
@@ -90,24 +89,25 @@ class BuyingServiceTest {
                         .insuranceTimeInYears(6)
                         .build();
 
+                User user = User.builder()
+                        .insurances(new ArrayList<>())
+                        .build();
+
                 Insurance houseInsurance = Insurance.builder()
                         .type(InsuranceType.HOUSE)
                         .startDate(LocalDate.now())
                         .endDate(LocalDate.now().plusYears(6))
                         .price(31200)
-                        .printableDetails("Town: Manchester\nStreet: Queen Victoria Street\nHouse Number: 238"
+                        .printableDetails("\nTown: Manchester\nStreet: Queen Victoria Street\nHouse Number: 238"
                                 + "\nZip Code: M29\nConstruction Year: 1978\nBuilding Value: 410000")
+                        .user(user)
                         .build();
 
-                InsuranceDisplayDto insuranceDisplayDto = InsuranceDisplayDto.builder()
+                InsuranceDto insuranceDto = InsuranceDto.builder()
                         .type(InsuranceType.HOUSE)
                         .startDate(LocalDate.now())
                         .endDate(LocalDate.now().plusYears(6))
                         .price(31200)
-                        .build();
-
-                User user = User.builder()
-                        .insurances(new ArrayList<>())
                         .build();
 
 
@@ -115,8 +115,7 @@ class BuyingServiceTest {
                 given(loggedInUser.getUser()).willReturn(user);
 
 
-                Assertions.assertThat(buyingService.buyHouseInsurance(houseDetails)).isEqualTo(insuranceDisplayDto);
-                assertThat(user.getInsurances().contains(houseInsurance)).isTrue();
+                assertThat(buyingService.buyHouseInsurance(houseDetails)).isEqualTo(insuranceDto);
 
         }
 
