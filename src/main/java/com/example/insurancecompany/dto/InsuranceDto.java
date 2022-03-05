@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor
 @Builder
-public class InsuranceDisplayDto {
+public class InsuranceDto {
 
         private Long id;
         private InsuranceType type;

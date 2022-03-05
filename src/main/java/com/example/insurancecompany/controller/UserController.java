@@ -1,5 +1,6 @@
 package com.example.insurancecompany.controller;
 
+import com.example.insurancecompany.domain.Insurance;
 import com.example.insurancecompany.domain.Role;
 import com.example.insurancecompany.domain.User;
 import com.example.insurancecompany.dto.UserDto;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -47,6 +49,11 @@ public class UserController {
         @PostMapping("/roles")
         public Role saveRole(@RequestBody Role role) {
                 return userService.saveRole(role);
+        }
+
+        @DeleteMapping("/users/insurances/{id}")
+        public void deleteInsurance(@PathVariable Long id) {
+                userService.deleteInsurance(id);
         }
 
 }

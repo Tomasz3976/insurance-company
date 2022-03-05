@@ -1,8 +1,10 @@
 package com.example.insurancecompany.service;
 
+import com.example.insurancecompany.domain.Insurance;
 import com.example.insurancecompany.domain.Role;
 import com.example.insurancecompany.dto.UserDto;
 import com.example.insurancecompany.mapper.UserDtoMapper;
+import com.example.insurancecompany.repository.InsuranceRepository;
 import com.example.insurancecompany.repository.RoleRepository;
 import com.example.insurancecompany.repository.UserRepository;
 import com.example.insurancecompany.domain.User;
@@ -20,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -32,6 +35,7 @@ public class UserService {
         private final UserRepository userRepository;
         private final PasswordEncoder passwordEncoder;
         private final RoleRepository roleRepository;
+        private final InsuranceRepository insuranceRepository;
 
         public List<UserDto> getAllUsers(Integer page) {
                 log.info("Fetching all users");
@@ -105,4 +109,8 @@ public class UserService {
                 user.getRoles().remove(role);
         }
 
+        public void deleteInsurance(Long id) {
+                log.info("Deleting insurance with id {}", id);
+                insuranceRepository.deleteById(id);
+        }
 }
