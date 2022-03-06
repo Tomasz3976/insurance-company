@@ -8,12 +8,10 @@ import com.example.insurancecompany.exception.WeakPasswordException;
 import com.example.insurancecompany.mapper.UserInDtoMapper;
 import com.example.insurancecompany.repository.UserRepository;
 import com.example.insurancecompany.utils.PasswordValidator;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.time.LocalDateTime;
 
 @Service
@@ -27,11 +25,13 @@ public class RegistrationService {
 
         public String registerUser(UserInDto userInDto) {
 
-                if (userRepository.findByEmail(userInDto.getEmail()).isPresent()) {
+                if(userRepository.findByEmail(userInDto.getEmail()).isPresent()) {
 
                         throw new ExistingEntityException("User With Given Email Already Exists!");
-                }
-                else if(!PasswordValidator.matcher(userInDto.getPassword()).matches()) {
+                } else if(userRepository.findByUsername(userInDto.getUsername()).isPresent()) {
+
+                        throw new ExistingEntityException("User With Given Username Already Exists!");
+                } else if(!PasswordValidator.matcher(userInDto.getPassword()).matches()) {
 
                         throw new WeakPasswordException("Password Must Contains At Least 8 Characters"
                         + ", At Least One Lowercase Letter, At Least One Uppercase Letter, At Least One Digit"

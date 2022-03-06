@@ -13,8 +13,9 @@ import java.time.ZonedDateTime;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-        @ExceptionHandler({ExistingEntityException.class, AssignedRoleException.class, WeakPasswordException.class})
-        public ResponseEntity<Object> handleCustomBadRequestException(Exception e, WebRequest request) {
+        @ExceptionHandler({ExistingEntityException.class, AssignedRoleException.class
+                , WeakPasswordException.class, PdfCreateException.class})
+        public ResponseEntity<Object> handleBadRequestException(Exception e, WebRequest request) {
 
                 ErrorDetails errorDetails = new ErrorDetails(e.getMessage(),
                         request.getDescription(false), ZonedDateTime.now());
