@@ -2,6 +2,7 @@ package com.example.insurancecompany.service;
 
 import com.example.insurancecompany.domain.Insurance;
 import com.example.insurancecompany.domain.User;
+import com.example.insurancecompany.exception.PdfCreateException;
 import com.example.insurancecompany.repository.InsuranceRepository;
 import com.example.insurancecompany.security.LoggedInUser;
 import com.lowagie.text.Document;
@@ -25,7 +26,6 @@ import java.util.Date;
 import java.util.List;
 
 import static com.lowagie.text.Element.ALIGN_CENTER;
-import static com.lowagie.text.Element.ALIGN_LEFT;
 import static com.lowagie.text.FontFactory.HELVETICA;
 import static com.lowagie.text.FontFactory.HELVETICA_BOLD;
 import static com.lowagie.text.FontFactory.TIMES;
@@ -57,7 +57,7 @@ public class PolicyService {
                 try {
                         PdfWriter.getInstance(document, policyResponse.getOutputStream());
                 } catch (IOException e) {
-                        e.printStackTrace();
+                        throw new PdfCreateException("Failed To Create PDF File!");
                 }
                 User user = loggedInUser.getUser();
                 document.open();
