@@ -8,14 +8,19 @@ spring:
     url: jdbc:mysql://localhost:3306/insurancecompanydb
     username: username
     password: password
+    initialization-mode: always
   jpa:
     hibernate:
       ddl-auto: create
     properties:
-        hibernate:
-          dialect: org.hibernate.dialect.MySQL8Dialect
-          format_sql: true
+       hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
     show-sql: true
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
   mail:
     host: smtp.gmail.com
     port: 587

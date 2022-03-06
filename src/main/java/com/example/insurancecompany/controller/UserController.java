@@ -1,6 +1,5 @@
 package com.example.insurancecompany.controller;
 
-import com.example.insurancecompany.domain.Insurance;
 import com.example.insurancecompany.domain.Role;
 import com.example.insurancecompany.domain.User;
 import com.example.insurancecompany.dto.UserDto;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
 import java.util.List;
 
 @RestController
@@ -24,7 +22,6 @@ import java.util.List;
 public class UserController {
 
         private final UserService userService;
-
 
         @GetMapping("/users")
         public List<UserDto> getAllUsers(@RequestParam(required = false) Integer page) {
@@ -49,6 +46,16 @@ public class UserController {
         @PostMapping("/roles")
         public Role saveRole(@RequestBody Role role) {
                 return userService.saveRole(role);
+        }
+
+        @PutMapping("/users/{id}/roles")
+        public User addRoleToUser(@PathVariable Long id, @RequestParam String roleName) {
+                return userService.addRoleToUser(id, roleName);
+        }
+
+        @DeleteMapping("/users/{id}/roles/{roleName}")
+        public void deleteUserRole(@PathVariable Long id, @PathVariable String roleName) {
+                userService.deleteUserRole(id, roleName);
         }
 
         @DeleteMapping("/users/insurances/{id}")
