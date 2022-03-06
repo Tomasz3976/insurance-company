@@ -33,7 +33,6 @@ public class BuyingService {
         private final InsuranceRepository insuranceRepository;
 
         public InsuranceDto buyCarInsurance(CarDetails details) {
-
                 CarCalculateDetails calculateDetails = CalculateDetailsMapper.mapToCarCalculateDetails(details);
                 Integer price = Calculator.carInsuranceCalculator(calculateDetails);
                 Integer time = details.getInsuranceTimeInYears();
@@ -51,11 +50,9 @@ public class BuyingService {
                 insuranceRepository.save(carInsurance);
                 InsuranceDto insuranceDto = InsuranceDtoMapper.mapToInsuranceDisplayDto(carInsurance);
                 return insuranceDto;
-
         }
 
         public InsuranceDto buyHouseInsurance(HouseDetails details) {
-
                 HouseCalculateDetails calculateDetails = CalculateDetailsMapper.mapToHouseCalculateDetails(details);
                 Integer price = Calculator.houseInsuranceCalculator(calculateDetails);
                 Integer time = details.getInsuranceTimeInYears();
@@ -73,7 +70,6 @@ public class BuyingService {
                 insuranceRepository.save(houseInsurance);
                 InsuranceDto insuranceDto = InsuranceDtoMapper.mapToInsuranceDisplayDto(houseInsurance);
                 return insuranceDto;
-
         }
 
 }

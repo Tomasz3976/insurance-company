@@ -14,17 +14,13 @@ import org.springframework.transaction.annotation.Transactional;
 public class CalculationService {
 
         public InsurancePrice carInsuranceCalculation(CarCalculateDetails details) {
-
                 log.info("Calculation performed");
                 return new InsurancePrice(Calculator.carInsuranceCalculator(details));
-
         }
 
         public InsurancePrice houseInsuranceCalculation(HouseCalculateDetails details) {
-
                 log.info("Calculation performed");
                 return new InsurancePrice(Calculator.houseInsuranceCalculator(details));
-
         }
 
 }

@@ -6,6 +6,7 @@ import com.example.insurancecompany.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -54,10 +55,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 http.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
                         .and().httpBasic().authenticationEntryPoint(swaggerAuthenticationEntryPoint());
                 http.authorizeRequests().antMatchers("/login").permitAll()
-                        .antMatchers("/users/**").hasAnyAuthority("ROLE_ADMIN")
-                        .antMatchers("/calculation/**").hasAnyAuthority("ROLE_USER")
-                        .antMatchers("/buying/**").hasAnyAuthority("ROLE_USER")
-                        .antMatchers("/policies/**").hasAnyAuthority("ROLE_USER")
+                        .antMatchers(HttpMethod.DELETE, "/users/**").hasAnyAuthority("ROLE_ADMIN")
+                        .antMatchers(HttpMethod.PUT, "/users/**").hasAnyAuthority("ROLE_ADMIN")
+                        .antMatchers(HttpMethod.POST, "/users/**").hasAnyAuthority("ROLE_MANAGER")
+                        .antMatchers(HttpMethod.GET, "/users/**").hasAnyAuthority("ROLE_MANAGER")
+                        .antMatchers("/calculation/**", "/buying/**", "/policies/**").hasAnyAuthority("ROLE_USER")
                         .antMatchers("/registration/**").permitAll()
                         .anyRequest().authenticated()
                         .and().logout().logoutSuccessUrl("/login");

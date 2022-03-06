@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/buying")
 public class BuyingController {
 
-
         private final BuyingService buyingService;
 
         @PostMapping("/carInsurances")

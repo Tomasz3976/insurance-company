@@ -46,12 +46,12 @@ public class PolicyService {
                         .orElseThrow(() -> new EntityNotFoundException("Insurance Not Found!"));
                 if(!loggedInUser.getUser().getInsurances().contains(insurance)) {
 
-                        throw new EntityNotFoundException(String.format("You Do Not Have Insurance With Id {}!", insuranceId));
+                        throw new EntityNotFoundException(String.format("You Do Not Have Insurance With Id %d!", insuranceId));
                 } else createPDF(response, insurance);
         }
 
         public void createPDF(HttpServletResponse response, Insurance insurance) {
-                log.info("Policy is being created in pdf form");
+                log.info("Policy is being created in PDF form");
                 HttpServletResponse policyResponse = createResponse(response);
                 Document document = new Document(A4);
                 try {
