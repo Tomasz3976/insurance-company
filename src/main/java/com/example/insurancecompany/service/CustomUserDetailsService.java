@@ -81,7 +81,8 @@ public class CustomUserDetailsService implements UserDetailsService {
                 String link = "http://localhost:8080/registration/confirm?token=" + token;
                 String template = emailTemplate.buildEmail(user.getUsername(), link);
                 emailService.send(user.getEmail(), template);
-                return token;
+                String message = "Verification link has been sent to " + user.getEmail();
+                return message;
         }
 
         public void enableUser(String email) {
